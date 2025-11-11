@@ -7,6 +7,8 @@ public class MazeGame {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        
+        System.out.println("Bem vindo ao jogo do Labirinto");
         char labirinto [][] = {
             {'#','#','#','#','#','#','#','#','#','#'},
             {'#','P',' ',' ','#',' ',' ',' ',' ','#'},

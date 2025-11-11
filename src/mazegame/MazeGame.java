@@ -27,7 +27,7 @@ public class MazeGame {
         int colunaJogador = 1, linhaJogador = 1;
         
         
-        
+        System.out.println("Movimente-se com w, a, s, d");
         do{
             System.out.println("Direção: ");
             String direcao = input.next();

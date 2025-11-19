@@ -22,16 +22,21 @@ public class MazeGame {
     {'#',' ',' ','#',' ',' ',' ',' ','#',' ',' ','#','#',' ','#'},
     {'#',' ','#',' ','#','#','#',' ','#',' ',' ',' ',' ',' ','#'},
     {'#',' ','#',' ',' ',' ',' ',' ','#',' ','#','#','#',' ','#'},
-    {'#',' ','#','#','#','#',' ','#','#',' ','#',' ','E',' ','#'},
+    {'#',' ','#','#','#','#',' ','#','#',' ','#',' ',' ',' ','#'},
     {'#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','S','#'},
     {'#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'}
 };
-        int linhaS = 14, colunaS = 14;
         
+        
+        int linhaSaida = 13;
+        int colunaSaida = 13;
         
         
         int colunaJogador = 1, linhaJogador = 1;
-        int linhaInimigo = linhaS-1, colunaInimigo = colunaS-1;
+        int proximaColuna = colunaJogador; 
+        int proximaLinha = linhaJogador;
+        int linhaInimigo = linhaSaida - 1;
+        int colunaInimigo = colunaSaida - 1;
         
         for(int i = 0; i < labirinto.length; i++){
                 for(int j = 0; j < labirinto[i].length; j++){
@@ -40,38 +45,44 @@ public class MazeGame {
                 System.out.println();
             }
         
-        
+        int contador = 0;
         do{
-            int contador = 0;
-                    contador++;
+            
+            contador++;
             System.out.println("Direção: ");
             String direcao = input.next();
             labirinto [linhaJogador][colunaJogador] = ' ';
             if(direcao.equals("a")){
-                colunaJogador--;
+                proximaColuna--;
             }else if(direcao.equals("d")){
-                colunaJogador++;
+                proximaColuna++;
             }else if(direcao.equals("s")){
-                linhaJogador++;
+                proximaLinha++;
             }else if(direcao.equals("w")){
-                linhaJogador--;
+                proximaLinha--;
             }else{
                 System.out.println("Direção Inválida");
             }
             
+            
+            
+            if(labirinto[proximaLinha][proximaColuna] == '#'){
+                System.out.println("Você bateu na parede");
+                proximaColuna = colunaJogador;
+                proximaLinha = linhaJogador;
+            }else{
+                colunaJogador = proximaColuna;
+                linhaJogador = proximaLinha;
+            }
             if(contador>=3){
                 labirinto[linhaInimigo][colunaInimigo] = 'E';
             } 
             
-            if(labirinto[linhaJogador][colunaJogador] == '#'){
-                colunaJogador = 1;
-                linhaJogador = 1;
-            }
             if(labirinto[linhaJogador][colunaJogador] != 'S'){
             labirinto [linhaJogador] [colunaJogador] = 'P';
             
+            }
             
-        }
             
             
             for(int i = 0; i < labirinto.length; i++){
@@ -87,7 +98,7 @@ public class MazeGame {
             
         }while(labirinto[linhaJogador][colunaJogador] != 'S');
         
-        
+        System.out.println("Você Ganhou EEEEEEEEEEEEEBAAAAAAAAAAAAA");
     }
     
 }

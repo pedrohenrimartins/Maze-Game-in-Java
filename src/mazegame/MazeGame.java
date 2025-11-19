@@ -1,34 +1,49 @@
 package mazegame;
 
+import java.util.Random;
 import java.util.Scanner;
 
 
 public class MazeGame {
 
-    public static void main(String[] args) {
+   public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        
-        System.out.println("Jogo do labirinto");
-        
+        Random rd = new Random();
         char labirinto [][] = {
-            {'#','#','#','#','#','#','#','#','#','#'},
-            {'#','P',' ',' ','#',' ',' ',' ',' ','#'},
-            {'#','#','#',' ','#',' ','#','#',' ','#'},
-            {'#',' ','#',' ',' ',' ','#',' ',' ','#'},
-            {'#',' ','#','#','#',' ','#',' ','#','#'},
-            {'#',' ',' ',' ','#',' ',' ',' ',' ','#'},
-            {'#',' ','#',' ','#','#','#','#',' ','#'},
-            {'#',' ','#',' ',' ',' ',' ','#',' ','#'},
-            {'#',' ',' ',' ','#','#',' ',' ','S','#'},
-            {'#','#','#','#','#','#','#','#','#','#'}
-    };
+    {'#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'},
+    {'#','P',' ',' ',' ',' ','#',' ',' ',' ',' ',' ','#',' ','#'},
+    {'#',' ','#','#','#',' ','#',' ','#','#',' ',' ','#',' ','#'},
+    {'#',' ',' ',' ','#',' ',' ',' ','#',' ',' ',' ',' ',' ','#'},
+    {'#',' ','#',' ','#','#','#',' ','#',' ','#','#','#',' ','#'},
+    {'#',' ','#',' ',' ',' ',' ',' ',' ',' ','#',' ',' ',' ','#'},
+    {'#',' ','#','#','#','#',' ','#','#',' ','#',' ','#','#','#'},
+    {'#',' ',' ',' ',' ','#',' ',' ',' ',' ',' ',' ','#',' ','#'},
+    {'#',' ','#','#',' ','#','#','#','#','#',' ','#',' ',' ','#'},
+    {'#',' ',' ','#',' ',' ',' ',' ','#',' ',' ','#','#',' ','#'},
+    {'#',' ','#',' ','#','#','#',' ','#',' ',' ',' ',' ',' ','#'},
+    {'#',' ','#',' ',' ',' ',' ',' ','#',' ','#','#','#',' ','#'},
+    {'#',' ','#','#','#','#',' ','#','#',' ','#',' ','E',' ','#'},
+    {'#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','S','#'},
+    {'#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'}
+};
+        int linhaS = 14, colunaS = 14;
+        
         
         
         int colunaJogador = 1, linhaJogador = 1;
+        int linhaInimigo = linhaS-1, colunaInimigo = colunaS-1;
+        
+        for(int i = 0; i < labirinto.length; i++){
+                for(int j = 0; j < labirinto[i].length; j++){
+                    System.out.print(labirinto[i][j]);
+                }
+                System.out.println();
+            }
         
         
-        System.out.println("Movimente-se com w, a, s, d");
         do{
+            int contador = 0;
+                    contador++;
             System.out.println("Direção: ");
             String direcao = input.next();
             labirinto [linhaJogador][colunaJogador] = ' ';
@@ -44,12 +59,20 @@ public class MazeGame {
                 System.out.println("Direção Inválida");
             }
             
+            if(contador>=3){
+                labirinto[linhaInimigo][colunaInimigo] = 'E';
+            } 
+            
             if(labirinto[linhaJogador][colunaJogador] == '#'){
                 colunaJogador = 1;
                 linhaJogador = 1;
             }
-            
+            if(labirinto[linhaJogador][colunaJogador] != 'S'){
             labirinto [linhaJogador] [colunaJogador] = 'P';
+            
+            
+        }
+            
             
             for(int i = 0; i < labirinto.length; i++){
                 for(int j = 0; j < labirinto[i].length; j++){
@@ -62,7 +85,7 @@ public class MazeGame {
             
             
             
-        }while(labirinto[linhaJogador][colunaJogador] != labirinto[8][8]);
+        }while(labirinto[linhaJogador][colunaJogador] != 'S');
         
         
     }

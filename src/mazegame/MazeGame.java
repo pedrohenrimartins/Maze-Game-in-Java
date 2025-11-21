@@ -51,6 +51,7 @@ public class MazeGame {
             contador++;
             System.out.println("Direção: ");
             String direcao = input.next();
+            
             labirinto [linhaJogador][colunaJogador] = ' ';
             if(direcao.equals("a")){
                 proximaColuna--;
@@ -69,6 +70,7 @@ public class MazeGame {
             if(labirinto[proximaLinha][proximaColuna] == '#'){
                 System.out.println("Você bateu na parede");
                 proximaColuna = colunaJogador;
+                        
                 proximaLinha = linhaJogador;
             }else{
                 colunaJogador = proximaColuna;

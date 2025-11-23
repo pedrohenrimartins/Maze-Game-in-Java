@@ -11,21 +11,35 @@ public class MazeGameFuncao {
         char [][] labirinto = definirMapa();
         imprimirMapa(labirinto);
         int[] jogador = {1, 1};
+        int[] inimigo = {13, 27};
         
+            
         int turno = 0;
-        
+                 
         while(ganhou != true){
+           if(jogador[0] == inimigo[0] && jogador[1] == inimigo[1]){
+               break;
+           }else{     
            turno++;
            labirinto = moverJogador(labirinto, jogador);
-           imprimirMapa(labirinto);
-           ganhou = checarVitoria(ganhou, labirinto, jogador);
-        }
+           char[][] labirintoE = movimentoInimigo(labirinto, inimigo, turno);
+           imprimirMapa(labirintoE);
+            
+           
+           ganhou = checarVitoria(ganhou, labirintoE, jogador, inimigo);
+           }
+           }
+        if(jogador[0] == inimigo[0] && jogador[1] == inimigo[1]){
+            System.out.println("O inimigo te capturou GAME OVER!!!!");
+        }else{
         System.out.println("Você Ganhou!!!!!!");
+        }
+                
     }
     
     static char [][] definirMapa() {
         Random rd = new Random();
-        int escolherMapa = rd.nextInt(1, 3);
+        int escolherMapa = rd.nextInt(1, 4);
         char [][] labirinto = new char[15][30];
         
         
@@ -44,7 +58,7 @@ public class MazeGameFuncao {
             {'#',' ','#',' ','#','#','#',' ','#',' ','#','#',' ','#','#','#','#','#','#','#','#','#',' ','#',' ','#',' ','#',' ','#'},
             {'#',' ',' ',' ','#',' ',' ',' ','#',' ','#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#',' ',' ',' ',' ',' ','#',' ','#'},
             {'#','#','#',' ','#',' ','#','#','#',' ','#',' ','#','#','#','#','#','#','#','#',' ','#',' ','#','#','#','#','#',' ','#'},
-            {'#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','S','#'},
+            {'#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','E','S','#'},
             {'#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'}
         };
             
@@ -63,7 +77,7 @@ public class MazeGameFuncao {
             {'#',' ','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#',' ','#'},
             {'#',' ','#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#',' ','#'},
             {'#',' ','#',' ','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#',' ','#'},
-            {'#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','S','#'},
+            {'#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','E','S','#'},
             {'#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'}
         };
             
@@ -82,7 +96,7 @@ public class MazeGameFuncao {
             {'#',' ','#',' ','#','#','#',' ','#',' ','#','#',' ','#','#','#','#','#','#','#','#','#',' ','#',' ','#',' ','#',' ','#'},
             {'#',' ',' ',' ','#',' ',' ',' ','#',' ','#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#',' ',' ',' ',' ',' ','#',' ','#'},
             {'#','#','#',' ','#',' ','#','#','#',' ','#',' ','#','#','#','#','#','#','#','#',' ','#',' ','#','#','#','#','#',' ','#'},
-            {'#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','S','#'},
+            {'#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','E','S','#'},
             {'#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'}
             };
         }
@@ -100,8 +114,8 @@ public class MazeGameFuncao {
             }
     }
     
-    static char[][] moverJogador(char labirinto [][], int[] jogador){
-        System.out.println("Entrou");
+    static char[][] moverJogador(char labirinto [][], int[] jogador ){
+       
         Scanner input = new Scanner(System.in);
         
         int linhaJogador = jogador[0];
@@ -146,8 +160,8 @@ public class MazeGameFuncao {
             return labirinto;
     }
     
-    static boolean checarVitoria(boolean ganhou, char[][]labirinto, int[] jogador){
-        if(labirinto[jogador[0]][jogador[1]] == 'S'){
+    static boolean checarVitoria(boolean ganhou, char[][]labirintoE, int[] jogador, int[]inimigo){
+        if(labirintoE[jogador[0]][jogador[1]] == 'S'){
             ganhou = true;
         }else{
             ganhou = false;
@@ -155,6 +169,50 @@ public class MazeGameFuncao {
         
         return ganhou;
             
+    }
+    static char[][] movimentoInimigo(char labirinto [][], int[] inimigo, int turno){
+        Random rd = new Random();
+        int direcao = rd.nextInt(1,5);
+        
+        int linhaInimigo = inimigo[0];
+        int colunaInimigo = inimigo[1];
+        int proximaColuna = colunaInimigo; 
+        int proximaLinha = linhaInimigo;
+            
+        if(turno >= 3){
+            labirinto [linhaInimigo][colunaInimigo] = ' ';
+            System.out.println(direcao);
+            if(direcao == 1){
+                proximaColuna--;
+            }else if(direcao == 2){
+                proximaColuna++;
+            }else if(direcao == 3){
+                System.out.println("Subiu");
+                proximaLinha--;
+            }else if(direcao == 4){
+                System.out.println("Desceu");
+                proximaLinha++;
+            }
+            
+            
+            if(labirinto[proximaLinha][proximaColuna] == '#' || labirinto[proximaLinha][proximaColuna] == 'S'){
+                
+                inimigo[1] = colunaInimigo;
+                        
+                inimigo[0] = linhaInimigo;
+            }else{
+                inimigo[1] = proximaColuna;
+                inimigo[0] = proximaLinha;
+            }
+            
+            if(labirinto[inimigo[0]][inimigo[1]] != 'S'){
+            labirinto [inimigo[0]] [inimigo[1]] = 'E';
+            
+            }
+        }
+            char[][]labirintoE = labirinto;
+        
+        return labirintoE;
     }
     
     

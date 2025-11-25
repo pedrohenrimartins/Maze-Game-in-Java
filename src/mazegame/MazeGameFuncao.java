@@ -51,7 +51,7 @@ public class MazeGameFuncao {
         char [][] labirinto = new char[15][30];
         
         
-        escolherMapa = 2;
+        
         if (escolherMapa == 1) {
         labirinto = new char[][]{
             {'#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'},
